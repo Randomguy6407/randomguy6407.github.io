@@ -1,112 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Online Shop</title>
-  <style>
-    /* Add styles for the website here */
-    body {
-      font-family: Arial, sans-serif;
-      background-image: url('./stars.jpg');
-      background-size: cover;
-    }
-    .header {
-      background-color: rgba(51, 51, 51, 0.8);
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    .header h1 {
-      margin: 0;
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background-color: rgba(238, 238, 238, 0.8);
-    }
-    .navbar a {
-      color: #333;
-      text-decoration: none;
-      margin-right: 20px;
-    }
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-    }
-    .product {
-      width: calc(33.33% - 20px);
-      background-color: white;
-      box-shadow: 1px 1px 5px #ccc;
-      padding: 20px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .product h3 {
-      margin: 0;
-    }
-    .product p {
-      margin: 0;
-    }
-    .product button {
-      background-color: #333;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-    }
-    .footer {
-      background-color: rgba(51, 51, 51, 0.8);
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-  </style>
+	<title>Send Message to Google Chat Webhook</title>
 </head>
 <body>
-  <!-- Add header -->
-  <div class="header">
-    <h1>My Online Shop</h1>
-  </div>
-  
-  <!-- Add navigation bar -->
-  <div class="navbar">
-    <a href="#">Home</a>
-    <a href="#">Products</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </div>
-  
-  <!-- Add products -->
-  <div class="products">
-    <div class="product">
-      <h3>Product 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product">
-      <h3>Product 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <button>Add to Cart</button>
-      <div class="product">
-      <h3>Product 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <button>Add to Cart</button>
-    </div><div class="product">
-      <h3>Product 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <button>Add to Cart</button>
-    </div><div class="product">
-      <h3>Product 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <button>Add to Cart</button>
-    </div><div class="product">
-      <h3>Product 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <button>Add to Cart</button>
-    </div>
-    </div>
-    </body>
+	<h1>Send Message to Google Chat Webhook</h1>
+	<label for="message">Message:</label>
+	<input type="text" id="message" name="message"><br><br>
+	<button type="button" onclick="sendMessage()">Send Message</button>
+
+	<script>
+		function sendMessage() {
+			var message = document.getElementById("message").value;
+			var url = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Jxc4Pv_9r_0qzLe9tXQwp132zjtdp1AW0fQ_6-EelnM%3D";
+			var data = {"text": message};
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					console.log(xhr.responseText);
+				}
+			};
+			xhr.send(JSON.stringify(data));
+		}
+	</script>
+</body>
+</html>
+
