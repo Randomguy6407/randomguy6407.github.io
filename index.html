@@ -1,6 +1,61 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Chat Keyword Checker</title>
+  </head>
+  <body>
+    <h1>Google Chat Keyword Checker</h1>
+    <input type="text" id="message" placeholder="Enter your message" />
+    <button id="sendBtn">Send</button>
+    <script>
+      const webhookUrl = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=YOUR_API_KEY&token=YOUR_TOKEN";
+      const keyword = "Testing4bugsID4958394835";
+      
+      // Function to check if the message contains the keyword
+      function containsKeyword(message) {
+        return message.toLowerCase().includes(keyword.toLowerCase());
+      }
+      
+      // Function to send a message to Google Chat
+      function sendMessage(message) {
+        const data = { text: message };
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+        fetch(webhookUrl, options)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to send message");
+            }
+            console.log("Message sent successfully");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+
+      const sendBtn = document.getElementById("sendBtn");
+      sendBtn.addEventListener("click", () => {
+        const messageInput = document.getElementById("message");
+        const message = messageInput.value;
+        if (containsKeyword(message)) {
+          sendMessage(`Keyword '${keyword}' found in message '${message}'`);
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<!DOCTYPE html>
 <html>
 <head>
+	<title>------------------------</title>
 	<title>Send Message to Google Chat Webhook</title>
 </head>
 <body>
