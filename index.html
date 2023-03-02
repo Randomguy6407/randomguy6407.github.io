@@ -11,7 +11,7 @@
     <button id="sendBtn">Send</button>
     <script>
       const webhookUrl = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Oczi6PknE5AhyXhMvae_nic1scrsqMgCN3VK0qwsUjI%3D";
-      const keyword = "Testing4bugsID4958394835";
+      const keyword = "3kliksphilip";
       
       // Function to check if the message contains the keyword
       function containsKeyword(message) {
@@ -45,41 +45,9 @@
         const messageInput = document.getElementById("message");
         const message = messageInput.value;
         if (containsKeyword(message)) {
-          sendMessage(`Keyword '${keyword}' found in message '${message}'`);
+          sendMessage(`Keyword 3kliksphilip Detected :)`);
         }
       });
     </script>
   </body>
 </html>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>------------------------</title>
-	<title>Send Message to Google Chat Webhook</title>
-</head>
-<body>
-	<h1>Send Message to Google Chat Webhook</h1>
-	<label for="message">Message:</label>
-	<input type="text" id="message" name="message"><br><br>
-	<button type="button" onclick="sendMessage()">Send Message</button>
-
-	<script>
-		function sendMessage() {
-			var message = document.getElementById("message").value;
-			var url = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Oczi6PknE5AhyXhMvae_nic1scrsqMgCN3VK0qwsUjI%3D";
-			var data = {"text": message};
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", url, true);
-			xhr.setRequestHeader("Content-Type", "application/json");
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState === 4 && xhr.status === 200) {
-					console.log(xhr.responseText);
-				}
-			};
-			xhr.send(JSON.stringify(data));
-		}
-	</script>
-</body>
-</html>
-
