@@ -8,10 +8,47 @@
 	<label for="message">Message:</label>
 	<input type="text" id="message" name="message"><br><br>
 	<button type="button" onclick="sendMessage()">Send Message</button>
+	<h1>use coupon</h1>
+	<label for="use a coupon!">Message:</label>
+	<input type="text" id="message2" name="CouponValidity"><br><br>
+	<button type="button" onclick="sendcouponrequest()">Send Message</button>
+	
 
 	<script>
+		const keywords = ["FunnyBookCoupon", "FreeCouponCupid", "Bookfire", "FunBooks", "used coupon"]
+		function containsKeyword(message) {
+            for (let i = 0; i < keywords.length; i++) {
+                if (message.includes(keywords[i])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 		function sendMessage() {
 			var message = document.getElementById("message").value;
+			var url = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Oczi6PknE5AhyXhMvae_nic1scrsqMgCN3VK0qwsUjI%3D";
+			var data = {"text": message};
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					console.log(xhr.responseText);
+				}
+			};
+			xhr.send(JSON.stringify(data));
+		}
+
+		function sendcouponrequest() {
+			var message = document.getElementById("message2").value;
+			if (containsKeyword(message)) {
+				var keywordEntered = message.split(' ')[1];
+				sendMessageV2(`Coupon ${keywordEntered} is used`);
+			}
+		}
+
+		function sendMessageV2(message) {
 			var url = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Oczi6PknE5AhyXhMvae_nic1scrsqMgCN3VK0qwsUjI%3D";
 			var data = {"text": message};
 			var xhr = new XMLHttpRequest();
