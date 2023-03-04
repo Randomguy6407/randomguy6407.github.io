@@ -8,14 +8,13 @@
 	<label for="message">Message:</label>
 	<input type="text" id="message" name="message"><br><br>
 	<button type="button" onclick="sendMessage()">Send Message</button>
-	<h1>use coupon</h1>
-	<label for="use a coupon!">Message:</label>
-	<input type="text" id="message2" name="CouponValidity"><br><br>
-	<button type="button" onclick="sendcouponrequest()">Send Message</button>
-	
+	<h1>Use a coupon!</h1>
+	<label for="coupon">Coupon:</label>
+	<input type="text" id="coupon" name="coupon"><br><br>
+	<button type="button" onclick="sendCouponRequest()">Use Coupon</button>
 
 	<script>
-		const keywords = ["FunnyBookCoupon", "FreeCouponCupid", "Bookfire", "FunBooks", "used coupon"]
+		const keywords = ["FunnyBookCoupon", "FreeCouponCupid", "Bookfire", "FunBooks", "3kliksphilip"]
 		function containsKeyword(message) {
             for (let i = 0; i < keywords.length; i++) {
                 if (message.includes(keywords[i])) {
@@ -40,11 +39,12 @@
 			xhr.send(JSON.stringify(data));
 		}
 
-		function sendcouponrequest() {
-			var message = document.getElementById("message2").value;
-			if (containsKeyword(message)) {
-				var keywordEntered = message.split(' ')[1];
-				sendMessageV2(`Coupon ${keywordEntered} is used`);
+		function sendCouponRequest() {
+			var coupon = document.getElementById("coupon").value;
+			if (containsKeyword(coupon)) {
+				var keywordEntered = coupon.split(' ')[1];
+				var message = `Coupon ${keywordEntered} is used`;
+				sendMessageV2(message);
 			}
 		}
 
