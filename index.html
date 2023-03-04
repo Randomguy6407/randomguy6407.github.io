@@ -1,50 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Google Chat Keyword Checker</title>
-  </head>
-  <body>
-    <h1>Google Chat Keyword Checker</h1>
-    <input type="text" id="message" placeholder="Enter your message" />
-    <button id="sendBtn">Send</button>
-    <script>
-      const webhookUrl = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Oczi6PknE5AhyXhMvae_nic1scrsqMgCN3VK0qwsUjI%3D";
-      const keyword = "3kliksphilip";
-      
-      // Function to check if the message contains the keyword
-      function containsKeyword(message) {
-        return message.toLowerCase().includes(keyword.toLowerCase());
-      }
-      
-      // Function to send a message to Google Chat
-      function sendMessage(message) {
-        const data = { text: message };
-        const options = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        };
-        fetch(webhookUrl, options)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to send message");
-            }
-            console.log("Message sent successfully");
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
+<html>
+<head>	
+  <title>Send Message to Google Chat Webhook</title>
+</head>
+<body>
+  	<h1>Send Message to Google Chat Webhook</h1>
+	<label for="message">Message:</label>
+	<input type="text" id="message" name="message"><br><br>
+	<button type="button" onclick="sendMessage()">Send Message</button>
 
-      const sendBtn = document.getElementById("sendBtn");
-      sendBtn.addEventListener("click", () => {
-        const messageInput = document.getElementById("message");
-        const message = messageInput.value;
-          sendMessage(message)
-    </script>
-  </body>
+	<script>
+		function sendMessage() {
+			var message = document.getElementById("message").value;
+			var url = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Oczi6PknE5AhyXhMvae_nic1scrsqMgCN3VK0qwsUjI%3D";
+			var data = {"text": message};
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					console.log(xhr.responseText);
+				}
+			};
+			xhr.send(JSON.stringify(data));
+		}
+	</script>
+</body>
 </html>
