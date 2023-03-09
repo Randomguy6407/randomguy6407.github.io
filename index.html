@@ -28,7 +28,7 @@
 
 		function sendMessage() {
 			var message = document.getElementById("message").value;
-			var url = Link;
+			var url = link;
 			var data = {"text": message};
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", url, true);
@@ -50,7 +50,7 @@
 		}
 
 		function sendMessageV2(message) {
-			var url = Link;
+			var url = link;
 			var data = {"text": message};
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", url, true);
