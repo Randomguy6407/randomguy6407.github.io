@@ -24,10 +24,11 @@
             }
             return null;
         }
+	    var link = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Fi3M3mmBFwSY6Hd_6caFGi4tPAO8jFCb0rlGE9mLLhw%3D"
 
 		function sendMessage() {
 			var message = document.getElementById("message").value;
-			var url = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=8JpzTP_nMKsQiWKzaRMHxtrJfocjBJ3AC1bTYy3Q6Rw%3D";
+			var url = Link;
 			var data = {"text": message};
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", url, true);
@@ -49,7 +50,7 @@
 		}
 
 		function sendMessageV2(message) {
-			var url = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=8JpzTP_nMKsQiWKzaRMHxtrJfocjBJ3AC1bTYy3Q6Rw%3D";
+			var url = Link;
 			var data = {"text": message};
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", url, true);
