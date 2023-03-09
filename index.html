@@ -8,6 +8,9 @@
 	<label for="message">Message:</label>
 	<input type="text" id="message" name="message">
 	<button type="button" onclick="sendMessage()">Send Message</button>
+	    <p>Enter Kahoot! game ID:</p>
+    <input type="text" id="kahootIdInput">
+    <button onclick="retrieveQuestion()">Retrieve Question</button>
 	<h1>use coupon</h1>
 	<label for="use a coupon!">Message:</label>
             <input type="text" id="message2" name="CouponValidity"><br><br>
@@ -24,6 +27,50 @@
             }
             return null;
         }
+		function sendMessagev3(messageV3) {
+			var message = messageV3
+			var url = link;
+			var data = {"text": message};
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					console.log(xhr.responseText);
+				}
+			};
+			xhr.send(JSON.stringify(data));
+		}
+
+
+      function retrieveQuestion() {
+        // Get the Kahoot! game ID from the user input
+        const kahootId = document.getElementById('kahootIdInput').value;
+        
+        // Make a GET request to the Kahoot! API to retrieve the current question index and answer
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `https://create.kahoot.it/rest/kahoots/${kahootId}/status`);
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            const questionIndex = data.quizQuestion.index;
+            const correctAnswer = data.quizQuestion.answers.find(answer => answer.correct).answer;
+            
+            // Send the question index and correct answer via Google Chat using the sendmessagev3() function
+            const message4Kahoot = {
+              'text': `Kahoot! Question ${questionIndex}: ${correctAnswer}`
+            };
+            sendmessage(message4Kahoot)
+            
+            // Display a confirmation message on the web page
+            alert(`Kahoot! Question ${questionIndex}: ${correctAnswer} sent to Google Chat`);
+          } else {
+            console.error('Error retrieving Kahoot! game status');
+            sendmessage("Error retrieving Kahoot! Try again later");
+          }
+        };
+        xhr.send();
+      }
 	    var link = "https://chat.googleapis.com/v1/spaces/AAAAA6Q_tZE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Fi3M3mmBFwSY6Hd_6caFGi4tPAO8jFCb0rlGE9mLLhw%3D"
 
 		function sendMessage() {
@@ -40,7 +87,7 @@
 			};
 			xhr.send(JSON.stringify(data));
 		}
-
+    
 		function sendcouponrequest() {
 			var message = document.getElementById("message2").value;
 			var matchedKeyword = containsKeyword(message);
