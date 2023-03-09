@@ -71,7 +71,6 @@
 		}
                    
 		    function getAnswer(pin) {
-	            var Spamcheck = -1
 		    if (isNaN(pin) || pin <= 0) {
                     alert('Please enter a valid PIN.');
                     return;
@@ -81,11 +80,12 @@
 			var currentQuestion = -1;
 			kahoot.on("QuestionStart", (question) => {
 				currentQuestion = question.number;
+				var Spamcheck = currentQuestion
 			});
 			kahoot.on("QuestionEnd", (question) => {
 				if (question.number == currentQuestion && Spamcheck == currentQuestion) {
 					var answer = question.quizQuestionAnswers[question.choiceAnswers.indexOf(question.correctAnswers[0])];
-					var Spamcheck = currentQuestion + 1
+					var Spamcheck = currentQuestion + 1;
 					sendMessageV3("The answer to question " + currentQuestion + " is " + answer);
 				}
 			});
