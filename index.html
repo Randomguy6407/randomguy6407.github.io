@@ -12,9 +12,6 @@
 	<label for="message">Message (bot2):</label>
 	<input type="text" id="message69" name="message">
 	<button type="button" onclick="sendMessageV2()">Send Message</button>
-<p>Kahoot FinEnter Kahoot game PIN:</p>
-	<input type="text" id="pin">
-	<button onclick="getAnswer(document.getElementById('pin').value)">Get Answer</button>>
 	<h1>use coupon</h1>
 	<label for="use a coupon!">Message:</label>
             <input type="text" id="message2" name="CouponValidity"><br><br>
@@ -36,7 +33,7 @@
             return null;
         }
 		function sendMessage() {
-			var message = document.getElementById("message69").value;
+			var message = document.getElementById("message").value;
 			var url = link;
 			var data = {"text": message};
 			var xhr = new XMLHttpRequest();
@@ -50,7 +47,7 @@
 			xhr.send(JSON.stringify(data));
 		}
 		function sendMessageV2() {
-			var message = document.getElementById("message").value;
+			var message = document.getElementById("message69").value;
 			var url = link2;
 			var data = {"text": message};
 			var xhr = new XMLHttpRequest();
